@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Problem1.6.1": {
+      "commandName": "Project",
+      "commandLineArgs": "20 10"
+    }
+  }
+}
