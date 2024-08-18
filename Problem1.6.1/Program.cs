@@ -10,32 +10,26 @@
                 return;
             }
 
-            if (!int.TryParse(args[0], out int i))
+            if (!int.TryParse(args[0], out int number1))
             {
                 Console.WriteLine("Error, please enter a valid value for first number");
                 return;
             }
 
-            if (!int.TryParse(args[1], out int j))
+            if (!int.TryParse(args[1], out int number2))
             {
                 Console.WriteLine("Error, please enter a valid value for second number");
                 return;
             }
 
-            if (i > j)
+            if (number1 > number2)
             {
                 Console.WriteLine("Error, please enter two valid number, such that number1 < number2");
                 return;
             }
 
-            var cycleLengths = new int[j - i + 1];
-            var cycleLengthsIndex = 0;
-            for (int count = i; count <= j; count++)
-            {
-                cycleLengths[cycleLengthsIndex++] = GetCycleLength(count);
-            }
-            var maxCycleLength = cycleLengths.Max();
-            Console.WriteLine($"{i} {j} {maxCycleLength}");
+            var maximumCycleLength = GetMaximumCycleLength(number1, number2);
+            Console.WriteLine($"{number1} {number2} {maximumCycleLength}");
         }
 
         public static int GetCycleLength(int n)
@@ -47,6 +41,17 @@
                 cycleLength++;
             }
             return cycleLength;
+        }
+
+        public static int GetMaximumCycleLength(int number1, int number2)
+        {
+            int maximumCycleLength = 0;
+            for (int i = number2; i >= number1; i--)
+            {
+                int cycleLength = GetCycleLength(i);
+                maximumCycleLength = cycleLength > maximumCycleLength ? cycleLength : maximumCycleLength;
+            }
+            return maximumCycleLength;
         }
     }
 }
